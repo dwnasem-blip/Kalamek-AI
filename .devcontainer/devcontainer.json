@@ -1,0 +1,38 @@
+{
+  "name": "Kalamek AI - Expo Development",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "expo.expo-tools",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "usernamehw.errorlens"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        }
+      }
+    }
+  },
+  "postCreateCommand": "npm install && npm run setup:mobile",
+  "forwardPorts": [8081, 19000, 19001],
+  "portsAttributes": {
+    "8081": {
+      "label": "Expo Server",
+      "onAutoForward": "notify"
+    },
+    "19000": {
+      "label": "Expo Metro",
+      "onAutoForward": "notify"
+    }
+  },
+  "remoteUser": "node"
+}
