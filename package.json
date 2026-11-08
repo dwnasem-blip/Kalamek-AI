@@ -21,6 +21,8 @@
     "db:push": "supabase db push",
     "test:supabase": "node scripts/test-supabase.js",
     "test:openai": "node scripts/test-openai.js",
+    "pipeline": "ts-node scripts/processing-pipeline.ts",
+    "demo": "ts-node scripts/demo-full-pipeline.ts",
     "build:ios": "eas build --platform ios",
     "build:android": "eas build --platform android",
     "submit:ios": "eas submit --platform ios",
