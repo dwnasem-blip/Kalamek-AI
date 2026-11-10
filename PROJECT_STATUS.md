@@ -222,7 +222,7 @@
 ## 🚀 الخطوات التالية الفورية
 
 ### المرحلة 1: الأساسيات والمصادقة (جاري العمل) 🔄
-**النسبة المكتملة**: 45% (جاري الحالياً)
+**النسبة المكتملة**: 60% (تعديلات Expo Go تمت)
 
 #### الأسبوع الأول - الآن
 ```
@@ -234,13 +234,18 @@
     - rewrite-text (إعادة الصياغة)
 [x] 4. تطبيق نظام الأرصدة والمعاملات (مكتمل)
 [x] 5. إنشاء AI services layer (مكتمل)
-[] 6. اختبار نظام المصادقة الكامل
-[] 7. إعداد Supabase project و API keys
-[] 8. تطبيق schema على Supabase
-[] 9. اختبار الاتصال مع Supabase
-[] 10. إعداد OpenAI API (free tier)
-[] 11. اختبار Edge Functions
-[] 12. Implement AI Writer UI
+[x] 6. 🔴 CRITICAL: تعديلات Expo Go (مكتمل)
+    - AsyncStorage integration ✅
+    - Navigation fix ✅
+    - eas.json setup ✅
+    - Expo Go documentation ✅
+[] 7. اختبار Expo Go على جهاز iPhone
+[] 8. إعداد Supabase project و API keys
+[] 9. تطبيق schema على Supabase
+[] 10. اختبار الاتصال مع Supabase
+[] 11. إعداد OpenAI API (free tier)
+[] 12. اختبار Edge Functions
+[] 13. Implement AI Writer UI (Phase 2)
 ```
 
 #### الملفات المُنشأة الجديدة (Phase 1)
@@ -342,6 +347,22 @@
 - ⚠️ استخدم .env دائماً
 - ⚠️ اختبر RLS policies
 - ⚠️ اختبر على أجهزة حقيقية
+
+---
+
+## 🔴 تعديلات Expo Go الحرجة (جديد)
+
+### 🚨 Breaking Changes (لكن ضروري):
+- **AsyncStorage Integration**: الآن تُحفظ الـ session بشكل دائم
+- **Navigation Fix**: الملاحة بين auth و app تعمل بشكل صحيح
+- **Loading State**: تم إضافة Loading indicator أثناء استعادة الـ session
+- **Development Build Ready**: eas.json معدّة للمرحلة القادمة
+
+### 📋 المشاكل التي تم حلها:
+1. ✅ AsyncStorage غير معرّفة → الآن معرّفة وتعمل
+2. ✅ Navigation logic غير صحيح → الآن يستخدم isSignedIn بشكل صحيح
+3. ✅ Session persistence غير موجودة → الآن تعمل بفضل AsyncStorage
+4. ✅ No loading feedback → الآن هناك LoadingIndicator
 
 ---
 
