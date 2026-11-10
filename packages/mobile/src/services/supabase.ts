@@ -2,12 +2,18 @@ import { createClient } from '@supabase/supabase-js';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || 'placeholder_anon_key';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    'Missing Supabase environment variables. Please check your .env file.'
+// Check if we have valid Supabase credentials
+const hasValidCredentials =
+  supabaseUrl !== 'https://placeholder.supabase.co' &&
+  supabaseAnonKey !== 'placeholder_anon_key';
+
+if (!hasValidCredentials) {
+  console.warn(
+    '⚠️ Supabase credentials not configured. App will run in offline mode. ' +
+    'Please configure EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY in .env file.'
   );
 }
 

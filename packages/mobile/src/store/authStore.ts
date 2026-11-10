@@ -98,13 +98,30 @@ export const useAuthStore = create<AuthState>((set) => ({
   restoreSession: async () => {
     set({ isLoading: true });
     try {
+      // Check if Supabase is properly configured
+      if (!supabase) {
+        console.warn('Supabase not initialized. Running in offline mode.');
+        set({ isSignedIn: false });
+        return;
+      }
+
       const { data, error } = await supabase.auth.getSession();
-      if (error) throw error;
+
+      if (error) {
+        console.warn('Session restore warning:', error);
+        // Don't throw - allow app to load in offline mode
+        set({ isSignedIn: false });
+        return;
+      }
+
       if (data.session?.user) {
         set({ user: data.session.user as any, isSignedIn: true });
+      } else {
+        set({ isSignedIn: false });
       }
     } catch (error) {
       console.error('Session restore error:', error);
+      // Allow app to continue even if session restore fails
       set({ isSignedIn: false });
     } finally {
       set({ isLoading: false });
