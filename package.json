@@ -1,0 +1,26 @@
+{
+  "name": "writego-ai-platform",
+  "version": "0.1.0",
+  "description": "WRITEGO - AI Content Creation Platform",
+  "private": true,
+  "workspaces": [
+    "packages/mobile",
+    "packages/admin",
+    "packages/shared"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "npm run dev -w mobile",
+    "build": "npm run build -w mobile && npm run build -w admin",
+    "test": "npm run test -w mobile && npm run test -w admin",
+    "lint": "npm run lint -w mobile && npm run lint -w admin",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,js,jsx,json,md,css}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

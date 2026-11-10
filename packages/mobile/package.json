@@ -1,0 +1,45 @@
+{
+  "name": "writego-mobile",
+  "version": "0.1.0",
+  "description": "WRITEGO mobile app - React Native + Expo",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "start:ios": "expo start --ios",
+    "start:android": "expo start --android",
+    "build:ios": "eas build --platform ios",
+    "build:android": "eas build --platform android",
+    "dev": "expo start --dev-client",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "expo": "~51.0.0",
+    "expo-router": "~3.4.0",
+    "expo-font": "~12.0.0",
+    "expo-splash-screen": "~0.27.0",
+    "expo-status-bar": "~1.12.0",
+    "expo-document-picker": "~12.0.0",
+    "expo-av": "~14.0.0",
+    "react": "18.2.0",
+    "react-native": "0.74.1",
+    "react-native-paper": "^5.10.0",
+    "@react-native-community/netinfo": "^11.0.0",
+    "zustand": "^4.4.0",
+    "@supabase/supabase-js": "^2.38.0",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "axios": "^1.6.0",
+    "dayjs": "^1.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@types/react": "~18.2.0",
+    "@types/react-native": "~0.74.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0",
+    "typescript": "~5.3.0"
+  },
+  "private": true
+}
