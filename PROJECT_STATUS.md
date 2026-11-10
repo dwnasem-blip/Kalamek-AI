@@ -51,6 +51,18 @@
    - NEXT_STEPS.md (الخطوات التالية)
    - DEPLOYMENT.md (النشر)
 
+7. **Claude Code Skills** ✅
+   - mobile-app-development (React Native patterns)
+   - ui-ux-design (Material Design + RTL support)
+   - supabase-backend (PostgreSQL + RLS)
+   - ai-video-studio (Character management + pipelines)
+   - ai-integration (OpenAI, ElevenLabs, Runway, D-ID)
+   - video-rendering (FFmpeg operations)
+   - testing-debugging (Unit/Integration tests)
+   - security-audit (API keys, RLS, GDPR)
+   - revenuecat-payments (Subscriptions + credits)
+   - code-review (TypeScript standards + merge criteria)
+
 ---
 
 ## 📁 الملفات المُنشأة
@@ -209,15 +221,20 @@
 
 ## 🚀 الخطوات التالية الفورية
 
-### الأسبوع الأول (في العمل)
+### المرحلة 1: الأساسيات والمصادقة (جاري العمل) 🔄
+**النسبة المكتملة**: 0% (بدأ للتو)
+
+#### الأسبوع الأول - الآن
 ```
-[] 1. اختبار نظام المصادقة الكامل
-[] 2. إعداد Supabase project
-[] 3. تطبيق schema على Supabase
-[] 4. اختبار الاتصال
-[] 5. إعداد OpenAI API (مجاني)
-[] 6. بناء أول Edge Function
-[] 7. UI لـ AI Writer
+[x] 1. إنشاء 10 Claude Code skills (مكتمل)
+[x] 2. التحقق من اكتشاف Skills (مكتمل)
+[] 3. اختبار نظام المصادقة الكامل
+[] 4. إعداد Supabase project و API keys
+[] 5. تطبيق schema على Supabase
+[] 6. اختبار الاتصال مع Supabase
+[] 7. إعداد OpenAI API (free tier)
+[] 8. إنشاء أول Edge Function
+[] 9. Implement AI Writer UI
 ```
 
 ### الأسبوع الثاني-الثالث
