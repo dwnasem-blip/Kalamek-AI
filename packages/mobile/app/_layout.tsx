@@ -22,7 +22,7 @@ export default function RootLayout() {
     };
 
     initializeApp();
-  }, [restoreSession]);
+  }, []);
 
   // Loading state
   if (isLoading || !isRestored) {

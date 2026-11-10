@@ -39,7 +39,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       if (error) throw error;
       if (data.user) {
-        set({ user: data.user as any, isSignedIn: true });
+        set({ user: data.user, isSignedIn: true });
       }
     } catch (error) {
       console.error('Sign up error:', error);
@@ -59,7 +59,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       if (error) throw error;
       if (data.user) {
-        set({ user: data.user as any, isSignedIn: true });
+        set({ user: data.user, isSignedIn: true });
       }
     } catch (error) {
       console.error('Sign in error:', error);
