@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from '@services/supabase';
-import { User } from '@types/index';
+import type { User } from '@types/index';
 
 interface AuthState {
   user: User | null;
@@ -15,6 +15,19 @@ interface AuthState {
   restoreSession: () => Promise<void>;
 }
 
+function mapSupabaseUserToUser(supabaseUser: any): User {
+  return {
+    id: supabaseUser.id,
+    email: supabaseUser.email || '',
+    username: supabaseUser.user_metadata?.username || '',
+    avatar_url: supabaseUser.user_metadata?.avatar_url,
+    language: supabaseUser.user_metadata?.language || 'en',
+    dialect: supabaseUser.user_metadata?.dialect,
+    created_at: supabaseUser.created_at || new Date().toISOString(),
+    updated_at: supabaseUser.updated_at || new Date().toISOString(),
+  };
+}
+
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isLoading: false,
@@ -26,20 +39,20 @@ export const useAuthStore = create<AuthState>((set) => ({
   signUp: async (email: string, password: string, username: string) => {
     set({ isLoading: true });
     try {
-      // Sign up with Supabase
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
             username,
+            language: 'en',
           },
         },
       });
 
       if (error) throw error;
       if (data.user) {
-        set({ user: data.user, isSignedIn: true });
+        set({ user: mapSupabaseUserToUser(data.user), isSignedIn: true });
       }
     } catch (error) {
       console.error('Sign up error:', error);
@@ -59,7 +72,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       if (error) throw error;
       if (data.user) {
-        set({ user: data.user, isSignedIn: true });
+        set({ user: mapSupabaseUserToUser(data.user), isSignedIn: true });
       }
     } catch (error) {
       console.error('Sign in error:', error);
@@ -98,7 +111,6 @@ export const useAuthStore = create<AuthState>((set) => ({
   restoreSession: async () => {
     set({ isLoading: true });
     try {
-      // Check if Supabase is properly configured
       if (!supabase) {
         console.warn('Supabase not initialized. Running in offline mode.');
         set({ isSignedIn: false });
@@ -109,19 +121,17 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       if (error) {
         console.warn('Session restore warning:', error);
-        // Don't throw - allow app to load in offline mode
         set({ isSignedIn: false });
         return;
       }
 
       if (data.session?.user) {
-        set({ user: data.session.user as any, isSignedIn: true });
+        set({ user: mapSupabaseUserToUser(data.session.user), isSignedIn: true });
       } else {
         set({ isSignedIn: false });
       }
     } catch (error) {
       console.error('Session restore error:', error);
-      // Allow app to continue even if session restore fails
       set({ isSignedIn: false });
     } finally {
       set({ isLoading: false });
