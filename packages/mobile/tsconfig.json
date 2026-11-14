@@ -24,7 +24,7 @@
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     },
-    "types": ["react-native"]
+    "types": ["react-native", "node"]
   },
   "include": [
     "**/*.ts",
