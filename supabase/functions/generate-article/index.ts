@@ -2,6 +2,7 @@ import { serve } from 'https://deno.land/std@0.208.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
 
 interface GenerateArticleRequest {
+  projectId: string;
   title: string;
   description: string;
   tone?: 'professional' | 'casual' | 'academic' | 'creative';
@@ -57,12 +58,12 @@ serve(async (req: Request): Promise<Response> => {
 
     // Parse request body
     const body: GenerateArticleRequest = await req.json();
-    const { title, description, tone = 'professional', language = 'ar', maxWords = 500 } = body;
+    const { projectId, title, description, tone = 'professional', language = 'ar', maxWords = 500 } = body;
 
     // Validate inputs
-    if (!title || !description) {
+    if (!projectId || !title || !description) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Title and description are required' }),
+        JSON.stringify({ success: false, error: 'projectId, title, and description are required' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -138,12 +139,9 @@ serve(async (req: Request): Promise<Response> => {
     const { error: insertError } = await supabase
       .from('generated_articles')
       .insert({
-        user_id: user.id,
-        title: title,
+        project_id: projectId,
         content: generatedContent,
         word_count: wordCount,
-        language: language,
-        tone: tone,
       });
 
     if (insertError) {

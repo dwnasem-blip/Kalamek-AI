@@ -2,6 +2,7 @@ import { serve } from 'https://deno.land/std@0.208.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
 
 interface RewriteTextRequest {
+  projectId: string;
   text: string;
   style: 'professional' | 'casual' | 'academic' | 'creative' | 'simple';
   tone?: 'formal' | 'friendly' | 'persuasive' | 'informative';
@@ -58,6 +59,7 @@ serve(async (req: Request): Promise<Response> => {
     // Parse request body
     const body: RewriteTextRequest = await req.json();
     const {
+      projectId,
       text,
       style,
       tone = 'informative',
@@ -65,9 +67,9 @@ serve(async (req: Request): Promise<Response> => {
     } = body;
 
     // Validate inputs
-    if (!text || text.trim().length === 0 || !style) {
+    if (!projectId || !text || text.trim().length === 0 || !style) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Text and style are required' }),
+        JSON.stringify({ success: false, error: 'projectId, text, and style are required' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -161,14 +163,10 @@ serve(async (req: Request): Promise<Response> => {
     const { error: insertError } = await supabase
       .from('rewrites')
       .insert({
-        user_id: user.id,
+        project_id: projectId,
         original_text: text,
         rewritten_text: rewrittenText,
-        original_word_count: originalWordCount,
-        rewritten_word_count: rewrittenWordCount,
-        language: language,
         style: style,
-        tone: tone,
       });
 
     if (insertError) {

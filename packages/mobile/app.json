@@ -30,11 +30,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "writego",
-    "plugins": [
-      [
-        "expo-document-picker"
-      ]
-    ]
+    "scheme": "writego"
   }
 }

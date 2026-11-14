@@ -2,6 +2,7 @@ import { serve } from 'https://deno.land/std@0.208.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
 
 interface SummarizeTextRequest {
+  projectId: string;
   text: string;
   summaryLength?: 'short' | 'medium' | 'long'; // short: 50 words, medium: 100 words, long: 200 words
   language?: string;
@@ -59,6 +60,7 @@ serve(async (req: Request): Promise<Response> => {
     // Parse request body
     const body: SummarizeTextRequest = await req.json();
     const {
+      projectId,
       text,
       summaryLength = 'medium',
       language = 'ar',
@@ -66,7 +68,7 @@ serve(async (req: Request): Promise<Response> => {
     } = body;
 
     // Validate inputs
-    if (!text || text.trim().length === 0) {
+    if (!projectId || !text || text.trim().length === 0) {
       return new Response(
         JSON.stringify({ success: false, error: 'Text is required' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -168,13 +170,10 @@ serve(async (req: Request): Promise<Response> => {
     const { error: insertError } = await supabase
       .from('summaries')
       .insert({
-        user_id: user.id,
+        project_id: projectId,
         original_text: text,
         summary: generatedSummary,
-        original_word_count: originalWordCount,
-        summary_word_count: summaryWordCount,
-        language: language,
-        summary_length: summaryLength,
+        length: summaryLength,
       });
 
     if (insertError) {

@@ -34,7 +34,7 @@ export default function AppLayout() {
           title: 'الرئيسية',
           tabBarLabel: 'الرئيسية',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" size={24} color={color} />
+            <MaterialCommunityIcons name="home" size={24} color={(color as any) || '#2563eb'} />
           ),
           headerTitle: 'WRITEGO',
         }}
@@ -46,7 +46,7 @@ export default function AppLayout() {
           title: 'كاتب النصوص',
           tabBarLabel: 'الكاتب',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="pencil" size={24} color={color} />
+            <MaterialCommunityIcons name="pencil" size={24} color={(color as any) || '#2563eb'} />
           ),
           headerTitle: 'كاتب النصوص',
         }}
@@ -58,7 +58,7 @@ export default function AppLayout() {
           title: 'ملخص النصوص',
           tabBarLabel: 'التلخيص',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="text-box-outline" size={24} color={color} />
+            <MaterialCommunityIcons name="text-box-outline" size={24} color={(color as any) || '#2563eb'} />
           ),
           headerTitle: 'ملخص النصوص',
         }}
@@ -70,7 +70,7 @@ export default function AppLayout() {
           title: 'أعادة الصياغة',
           tabBarLabel: 'إعادة الصياغة',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="pencil-box" size={24} color={color} />
+            <MaterialCommunityIcons name="pencil-box" size={24} color={(color as any) || '#2563eb'} />
           ),
           headerTitle: 'إعادة الصياغة',
         }}
@@ -82,7 +82,7 @@ export default function AppLayout() {
           title: 'الإعدادات',
           tabBarLabel: 'الإعدادات',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="cog" size={24} color={color} />
+            <MaterialCommunityIcons name="cog" size={24} color={(color as any) || '#2563eb'} />
           ),
           headerTitle: 'الإعدادات',
         }}
